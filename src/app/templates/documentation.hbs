@@ -111,14 +111,14 @@
 
                     <div class="div-markup">
                         <div class="kss-section__placeholder-container">
-                            <p class="kss-modifiers__description">
+                            <p id="clipboard-{{@index}}" class="kss-modifiers__description">
                                 {{{description}}}
                             </p>
                             <a class="clipboard-btn" data-clipboard-target="#clipboard-{{@index}}">
                                 Copy placeholder
                             </a>
                         </div>
-                        <code id="clipboard-{{@index}}" class="language-markup">{{markup}}</code>
+                        <code class="language-markup">{{markup}}</code>
                     </div>
                 </article>
                 {{/each}}
