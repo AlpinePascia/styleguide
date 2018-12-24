@@ -1,0 +1,135 @@
+<section class="kss-documentation">
+    {{#if homepage}}
+    <article class="kss-markdown">
+        {{{homepage}}}
+    </article>
+    {{else}}
+
+    <!-- display each section, in order. the "root" element comes first in this
+                loop, and can be detected using the "#if @first" block as seen below. -->
+    {{#each sections}}
+    {{#if @first}}
+    <header class="kss-section kss-section--depth-{{depth}}" id="kssref-{{referenceURI}}">
+        {{else}}
+        <section class="kss-section kss-section--depth-{{depth}}" id="kssref-{{referenceURI}}">
+            {{/if}}
+
+            <article class="kss-section__content">
+                {{#if source.filename}}
+                <p class="kss-section__source">Source:
+                    <span>
+                        {{source.filename}}
+                    </span>, line
+                    <span>
+                        {{source.line}}
+                    </span>
+                </p>
+                {{/if}}
+
+                <a class="kss-section__permalink" href="#kssref-{{referenceURI}}">
+                    <h{{depth}} class="kss-section__item kss-section__item--depth-{{depth}}">
+                        <span class="kss-section__ref">
+                            {{referenceNumber}}
+                        </span>
+
+                        <span class="kss-section__name">
+                            {{header}}
+                        </span>
+                    </h{{depth}}>
+                </a>
+
+                <!-- {{#if description}}
+                <div class="kss-section__description
+                            {{#if deprecated}} state-deprecated{{/if}}
+                            {{#if experimental}} state-experimental{{/if}}">
+                    {{{description}}}
+                </div>
+                {{/if}} -->
+
+                {{#if parameters}}
+                <ul class="kss-parameters">
+                    {{#each parameters}}
+                    <li class="kss-parameters__item">
+                        <p class="kss-parameters__description">
+                            {{{description}}}
+                            {{#if defaultValue}}
+                            Defaults to:
+                            <code>
+                                {{defaultValue}}
+                            </code>
+                            {{/if}}
+                        </p>
+                        <code class="kss-parameters__name">
+                            {{name}}
+                        </code>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </article>
+
+            {{#if example}}
+            <article class="kss-section__modifiers">
+                <!-- <h1 class="kss-modifiers__heading">Example{{#if modifiers}}s{{/if}}
+                </h1> -->
+
+                {{#unless modifiers}}
+                <!-- <h2 class="kss-modifiers__name">
+                    Base style
+                </h2> -->
+
+                <div class="kss-modifiers__example">
+                    {{{markup}}}
+                </div>
+                <div class="div-markup">
+                    {{#if description}}
+                    <div class="kss-section__placeholder-container">
+                        <div id="clipboard-default-{{@index}}" class="kss-section__description
+                        {{#if deprecated}} state-deprecated{{/if}}
+                        {{#if experimental}} state-experimental{{/if}}">
+                        {{{description}}}
+                    </div>
+                    <a class="clipboard-btn" data-clipboard-target="#clipboard-default-{{@index}}">
+                        Copy placeholder
+                    </a>
+                    {{/if}}
+                    </div>
+                    <code class="language-markup">{{markup}}</code>
+                </div>
+                {{/unless}}
+
+                {{#each modifiers}}
+                <article class="kss-modifiers__modifier">
+
+                    <!-- <h2 class="kss-modifiers__name">
+                        {{name}}
+                    </h2> -->
+
+                    <div class="kss-modifiers__example">
+                        {{{markup}}}
+                    </div>
+
+                    <div class="div-markup">
+                        <div class="kss-section__placeholder-container">
+                            <p class="kss-modifiers__description">
+                                {{{description}}}
+                            </p>
+                            <a class="clipboard-btn" data-clipboard-target="#clipboard-{{@index}}">
+                                Copy placeholder
+                            </a>
+                        </div>
+                        <code id="clipboard-{{@index}}" class="language-markup">{{markup}}</code>
+                    </div>
+                </article>
+                {{/each}}
+            </article>
+            {{/if}}
+
+            {{#if @first}}
+    </header>
+    {{else}}
+</section>
+{{/if}}
+{{/each}}
+{{/if}}
+</section>

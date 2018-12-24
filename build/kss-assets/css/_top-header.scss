@@ -1,0 +1,38 @@
+$headerHeight: 60px;
+
+.top-header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $headerHeight;
+  background-color: black;
+  color: white;
+  z-index: 11;
+  padding-left: 20px;
+
+  &-div {
+    margin-left: 15px;
+  }
+
+  &-logo {
+    // margin-right: 8px;
+    height: 32px;
+  }
+
+  &-logo-name {
+    font-size: rem(22px);
+    font-weight: 700;
+    left: 20px;
+    margin-right: 0.26cm;
+    position: absolute;
+  }
+
+  &-btn-hamburger {
+    font-size: 32px;
+    cursor: pointer;
+  }
+}

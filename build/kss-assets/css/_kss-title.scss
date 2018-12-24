@@ -1,0 +1,12 @@
+$kss-title-color: $mult-e;
+
+.kss-title {
+  margin: 0;
+  color: $kss-title-color;
+  text-align: center;
+  font-size: rem(24px);
+  
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+}
