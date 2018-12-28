@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="generator" content="kss-node">
 
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
 
@@ -16,23 +16,10 @@
     <link rel="stylesheet" href="kss-assets/css/kss.css">
     {{{styles}}}
 
-    <script src="kss-assets/vendor/jquery.js"></script>
+    <!-- <script src="kss-assets/vendor/jquery.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
-
-    <script>
-        require.config({
-            baseUrl: 'static/version1545923088/frontend/Mygento/nespresso/ru_RU/',
-            paths: {
-                'jquery/ui': 'jquery/jquery-ui',
-                'ko': 'knockoutjs/knockout',
-                'jquery/jquery-storageapi': 'jquery/jquery.storageapi.min',
-                'text': 'mage/requirejs/text',
-                'ui/template': 'Magento_Ui/templates'
-            },
-        });
-    </script>
 </head>
 
 
@@ -214,20 +201,29 @@
 </section>
 
         <!-- scripts. -->
-<!-- <script src="kss-assets/vendor/jquery.js"></script> -->
-<script src="kss-assets/vendor/prism.js"></script>
-<script src="kss-assets/js/kss.js"></script>
-<!-- <script src="kss-assets/js/openModal.js"></script>
-<script src="kss-assets/js/dropdown.js"></script>
-<script src="kss-assets/js/dropup.js"></script> -->
-
 <script type="text/javascript">
-    require(['https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js'], function(ClipboardJS) {
+    require.config({
+        baseUrl: 'static/version1545923088/frontend/Mygento/nespresso/ru_RU/',
+        paths: {
+            'jquery/ui': 'jquery/jquery-ui',
+            'ko': 'knockoutjs/knockout',
+            'jquery/jquery-storageapi': 'jquery/jquery.storageapi.min',
+            'text': 'mage/requirejs/text',
+            'ui/template': 'Magento_Ui/templates',
+            'kss-assets': '../../../../../../kss-assets'
+        },
+    });
+
+    require([
+        'https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js',
+        'kss-assets/vendor/prism',
+        'kss-assets/js/kss',
+    ], function(ClipboardJS) {
         new ClipboardJS('.clipboard-btn');
     });
 </script>
 
-{{{scripts}}}
+<!-- {{{scripts}}} -->
 <!-- /scripts. -->
 
 </body>
