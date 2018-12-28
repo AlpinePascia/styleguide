@@ -15,4 +15,22 @@
     <link rel="stylesheet" href="kss-assets/vendor/prism.css">
     <link rel="stylesheet" href="kss-assets/css/kss.css">
     {{{styles}}}
+
+    <script src="kss-assets/vendor/jquery.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+
+    <script>
+        require.config({
+            baseUrl: 'static/version1545923088/frontend/Mygento/nespresso/ru_RU/',
+            paths: {
+                'jquery/ui': 'jquery/jquery-ui',
+                'ko': 'knockoutjs/knockout',
+                'jquery/jquery-storageapi': 'jquery/jquery.storageapi.min',
+                'text': 'mage/requirejs/text',
+                'ui/template': 'Magento_Ui/templates'
+            },
+        });
+    </script>
 </head>
