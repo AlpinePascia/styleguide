@@ -1,0 +1,392 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Styleguide</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="generator" content="kss-node">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="kss-assets/vendor/prism.css">
+    <link rel="stylesheet" href="kss-assets/css/kss.css">
+    <link rel="stylesheet" href="kss-assets/css/styleguide.css">
+
+
+    <!-- <script src="kss-assets/vendor/jquery.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+</head>
+
+
+<body class="kss-body">
+        <header class="top-header">
+    <img class="top-header-logo" src="./kss-assets/media/logo-nespresso-white.svg" alt="Nespresso Logo">
+    <span class="top-header-logo-name">Styleguide</span>
+</header>
+
+        <section class="nav-sidebar">
+            <ul class="kss-nav">
+                <li class="kss-nav__item">
+                    <a href="index.html">
+                        <span class="kss-nav__ref">0</span>
+                        <span class="kss-nav__name">Introduction</span>
+                    </a>
+                </li>
+                    <li class="kss-nav__item">
+                        <a
+                            class=""
+                            href="section-buttons.html">
+                            <span class="kss-nav__ref">1</span>
+                            <span class="kss-nav__name">Buttons</span>
+                        </a>
+                    </li>
+                    <li class="kss-nav__item">
+                        <a
+                            class=""
+                            href="section-colors.html">
+                            <span class="kss-nav__ref">2</span>
+                            <span class="kss-nav__name">Colors</span>
+                        </a>
+                    </li>
+                    <li class="kss-nav__item">
+                        <a
+                            class=""
+                            href="section-filters.html">
+                            <span class="kss-nav__ref">3</span>
+                            <span class="kss-nav__name">Catalog Filters</span>
+                        </a>
+                    </li>
+                    <li class="kss-nav__item">
+                        <a
+                            class=""
+                            href="section-headings.html">
+                            <span class="kss-nav__ref">4</span>
+                            <span class="kss-nav__name">Headings</span>
+                        </a>
+                    </li>
+                    <li class="kss-nav__item">
+                        <a
+                            class="kss-state-active"
+                            href="section-inputs.html">
+                            <span class="kss-nav__ref">5</span>
+                            <span class="kss-nav__name">Inputs</span>
+                        </a>
+                                <ul class="kss-nav__subnav">
+                                        <li class="kss-nav__item ">
+                                            <a href="section-inputs.html#kssref-inputs-checkboxes">
+                                                <span class="kss-nav__ref">5.1</span>
+                                                <span class="kss-nav__name">Checkboxes</span>
+                                            </a>
+                                        </li>
+                                        <li class="kss-nav__item ">
+                                            <a href="section-inputs.html#kssref-inputs-radios">
+                                                <span class="kss-nav__ref">5.2</span>
+                                                <span class="kss-nav__name">Radios</span>
+                                            </a>
+                                        </li>
+                                        <li class="kss-nav__item ">
+                                            <a href="section-inputs.html#kssref-inputs-textinputs">
+                                                <span class="kss-nav__ref">5.3</span>
+                                                <span class="kss-nav__name">TextInputs</span>
+                                            </a>
+                                        </li>
+                                </ul>
+                    </li>
+            </ul>
+        </section>
+
+        <section class="kss-documentation">
+
+    <!-- display each section, in order. the "root" element comes first in this
+                loop, and can be detected using the "#if @first" block as seen below. -->
+    <header class="kss-section kss-section--depth-1" id="kssref-inputs">
+
+            <article class="kss-section__content">
+
+                <a class="kss-section__permalink" href="#kssref-inputs">
+                    <h1 class="kss-section__item kss-section__item--depth-1">
+                        <span class="kss-section__ref">
+                            5
+                        </span>
+
+                        <span class="kss-section__name">
+                            Inputs
+                        </span>
+                    </h1>
+                </a>
+
+                <!--  -->
+
+            </article>
+
+
+    </header>
+        <section class="kss-section kss-section--depth-2" id="kssref-inputs-checkboxes">
+
+            <article class="kss-section__content">
+                <p class="kss-section__source">Source:
+                    <span>
+                        components/_checkboxes.scss
+                    </span>, line
+                    <span>
+                        1
+                    </span>
+                </p>
+
+                <a class="kss-section__permalink" href="#kssref-inputs-checkboxes">
+                    <h2 class="kss-section__item kss-section__item--depth-2">
+                        <span class="kss-section__ref">
+                            5.1
+                        </span>
+
+                        <span class="kss-section__name">
+                            Checkboxes
+                        </span>
+                    </h2>
+                </a>
+
+                <!-- 
+                <div class="kss-section__description
+                            
+                            ">
+                    <p>@extend %input-checkbox;</p>
+
+                </div>
+                 -->
+
+            </article>
+
+            <article class="kss-section__modifiers">
+                <!-- <h1 class="kss-modifiers__heading">Example
+                </h1> -->
+
+                <!-- <h2 class="kss-modifiers__name">
+                    Base style
+                </h2> -->
+
+                <div class="kss-modifiers__example">
+                    <label class="checkbox-wrapper">
+    <input type="checkbox" />
+    <span class="label-text"> Checkbox label</span>
+</label>
+                </div>
+                <div class="div-markup">
+                    <div class="kss-section__placeholder-container">
+                        <div id="clipboard-default-1" class="kss-section__description
+                        
+                        ">
+                        <p>@extend %input-checkbox;</p>
+
+                    </div>
+                    <a class="clipboard-btn" data-clipboard-target="#clipboard-default-1">
+                        Copy placeholder
+                    </a>
+                    </div>
+                    <code class="language-markup">&lt;label class&#x3D;&quot;checkbox-wrapper&quot;&gt;
+    &lt;input type&#x3D;&quot;checkbox&quot; /&gt;
+    &lt;span class&#x3D;&quot;label-text&quot;&gt; Checkbox label&lt;/span&gt;
+&lt;/label&gt;</code>
+                </div>
+
+            </article>
+
+</section>
+        <section class="kss-section kss-section--depth-2" id="kssref-inputs-radios">
+
+            <article class="kss-section__content">
+                <p class="kss-section__source">Source:
+                    <span>
+                        components/_radios.scss
+                    </span>, line
+                    <span>
+                        1
+                    </span>
+                </p>
+
+                <a class="kss-section__permalink" href="#kssref-inputs-radios">
+                    <h2 class="kss-section__item kss-section__item--depth-2">
+                        <span class="kss-section__ref">
+                            5.2
+                        </span>
+
+                        <span class="kss-section__name">
+                            Radios
+                        </span>
+                    </h2>
+                </a>
+
+                <!-- 
+                <div class="kss-section__description
+                            
+                            ">
+                    <p>@extend %input-radio;</p>
+
+                </div>
+                 -->
+
+            </article>
+
+            <article class="kss-section__modifiers">
+                <!-- <h1 class="kss-modifiers__heading">Example
+                </h1> -->
+
+                <!-- <h2 class="kss-modifiers__name">
+                    Base style
+                </h2> -->
+
+                <div class="kss-modifiers__example">
+                    <label class="radio-wrapper">
+    <input name="radio-group" type="radio" />
+    <span class="label-text"> Radio button label 1</span>
+</label>
+<div class="kss-vertical-spacer">Ignore me</div>
+<label class="radio-wrapper">
+    <input name="radio-group" type="radio" />
+    <span class="label-text"> Radio button label 2</span>
+</label>
+                </div>
+                <div class="div-markup">
+                    <div class="kss-section__placeholder-container">
+                        <div id="clipboard-default-2" class="kss-section__description
+                        
+                        ">
+                        <p>@extend %input-radio;</p>
+
+                    </div>
+                    <a class="clipboard-btn" data-clipboard-target="#clipboard-default-2">
+                        Copy placeholder
+                    </a>
+                    </div>
+                    <code class="language-markup">&lt;label class&#x3D;&quot;radio-wrapper&quot;&gt;
+    &lt;input name&#x3D;&quot;radio-group&quot; type&#x3D;&quot;radio&quot; /&gt;
+    &lt;span class&#x3D;&quot;label-text&quot;&gt; Radio button label 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;div class&#x3D;&quot;kss-vertical-spacer&quot;&gt;Ignore me&lt;/div&gt;
+&lt;label class&#x3D;&quot;radio-wrapper&quot;&gt;
+    &lt;input name&#x3D;&quot;radio-group&quot; type&#x3D;&quot;radio&quot; /&gt;
+    &lt;span class&#x3D;&quot;label-text&quot;&gt; Radio button label 2&lt;/span&gt;
+&lt;/label&gt;</code>
+                </div>
+
+            </article>
+
+</section>
+        <section class="kss-section kss-section--depth-2" id="kssref-inputs-textinputs">
+
+            <article class="kss-section__content">
+                <p class="kss-section__source">Source:
+                    <span>
+                        components/_text-inputs.scss
+                    </span>, line
+                    <span>
+                        1
+                    </span>
+                </p>
+
+                <a class="kss-section__permalink" href="#kssref-inputs-textinputs">
+                    <h2 class="kss-section__item kss-section__item--depth-2">
+                        <span class="kss-section__ref">
+                            5.3
+                        </span>
+
+                        <span class="kss-section__name">
+                            TextInputs
+                        </span>
+                    </h2>
+                </a>
+
+                <!-- 
+                <div class="kss-section__description
+                            
+                            ">
+                    <p>@extend %input-text;</p>
+
+                </div>
+                 -->
+
+            </article>
+
+            <article class="kss-section__modifiers">
+                <!-- <h1 class="kss-modifiers__heading">Example
+                </h1> -->
+
+                <!-- <h2 class="kss-modifiers__name">
+                    Base style
+                </h2> -->
+
+                <div class="kss-modifiers__example">
+                    <div class="field">
+    <label for="inputName" class="label">First name*</label>
+    <div class="control">
+        <input name="inputName" class="input-text" value="Ivan" />
+        <div for="inputName" class="error">Validation error</div>
+        <div class="tooltip">Use only Latin characters</div>
+        <span class="note"></span>
+    </div>
+</div>
+<script>require(['Magento_Ui/js/input-ui'])</script>
+                </div>
+                <div class="div-markup">
+                    <div class="kss-section__placeholder-container">
+                        <div id="clipboard-default-3" class="kss-section__description
+                        
+                        ">
+                        <p>@extend %input-text;</p>
+
+                    </div>
+                    <a class="clipboard-btn" data-clipboard-target="#clipboard-default-3">
+                        Copy placeholder
+                    </a>
+                    </div>
+                    <code class="language-markup">&lt;div class&#x3D;&quot;field&quot;&gt;
+    &lt;label for&#x3D;&quot;inputName&quot; class&#x3D;&quot;label&quot;&gt;First name*&lt;/label&gt;
+    &lt;div class&#x3D;&quot;control&quot;&gt;
+        &lt;input name&#x3D;&quot;inputName&quot; class&#x3D;&quot;input-text&quot; value&#x3D;&quot;Ivan&quot; /&gt;
+        &lt;div for&#x3D;&quot;inputName&quot; class&#x3D;&quot;error&quot;&gt;Validation error&lt;/div&gt;
+        &lt;div class&#x3D;&quot;tooltip&quot;&gt;Use only Latin characters&lt;/div&gt;
+        &lt;span class&#x3D;&quot;note&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;require([&#x27;Magento_Ui/js/input-ui&#x27;])&lt;/script&gt;</code>
+                </div>
+
+            </article>
+
+</section>
+</section>
+
+        <!-- scripts. -->
+<script type="text/javascript">
+    require.config({
+        baseUrl: 'static/version1545923088/frontend/Mygento/nespresso/ru_RU/',
+        paths: {
+            'jquery/ui': 'jquery/jquery-ui',
+            'ko': 'knockoutjs/knockout',
+            'jquery/jquery-storageapi': 'jquery/jquery.storageapi.min',
+            'text': 'mage/requirejs/text',
+            'ui/template': 'Magento_Ui/templates',
+            'kss-assets': '../../../../../../kss-assets'
+        },
+    });
+
+    require([
+        'https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js',
+        'kss-assets/vendor/prism',
+        'kss-assets/js/kss',
+    ], function(ClipboardJS) {
+        new ClipboardJS('.clipboard-btn');
+    });
+</script>
+
+<!-- <script src="kss-assets/js/kss.js"></script>
+ -->
+<!-- /scripts. -->
+
+</body>
+</html>
