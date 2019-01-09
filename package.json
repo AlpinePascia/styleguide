@@ -1,0 +1,12 @@
+{
+  "name": "styleguide",
+  "version": "0.0.1",
+  "main": "gulpfile.js",
+  "repository": "https://github.com/AlpinePascia/styleguide.git",
+  "author": "Alex Xodov <a.hodov@mygento.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^4.0.0",
+    "sass": "^1.15.3"
+  }
+}
