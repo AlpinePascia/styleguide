@@ -1,30 +1,57 @@
+/*  eslint-disable no-console  */
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const fileinclude = require('gulp-file-include');
 const run = require('gulp-run');
 const fs = require('fs');
 const merge = require('merge-stream');
+const util = require('gulp-util');
 
 const _pick = require('lodash/pick');
 const _assign = require('lodash/assign');
 const _mapKeys = require('lodash/mapKeys');
 
-const config = require('./config.js');
-const themeFolder = config.themeFolder;
-const destination = config.destination;
-const cssFolder = `${themeFolder}/web/css`;
-
+const docPath = './src/app/docs';
 const kssBaseConfig = {
   title: 'Styleguide',
   placeholder: '',
   builder: 'src/app/',
-  css: [
-    'kss-assets/css/styleguide.css'
-  ],
-  js: [
-    'kss-assets/js/kss.js'
-  ]
+  css: ['kss-assets/css/styleguide.css'],
+  js: ['kss-assets/js/kss.js']
 };
+
+let config;
+try {
+  config = require('./config.js');
+} catch (e) {
+  config = util.env;
+
+  if (!config.theme || !config.source || !config.destination) {
+    console.log('Provide a minimum configuration as described in the docs');
+    process.exit(1);
+  }
+}
+
+console.log(config);
+
+const theme = config.theme;
+const destination = config.destination;
+const cssFolder = `${theme}/web/css`;
+
+
+gulp.task('kss-config', done => {
+  const props = ['title', 'source', 'destination', 'static', 'placeholder'];
+  const fromConfig = _pick(config, props);
+  // include the docPath - it's a kss thing
+  const source = [config.source, docPath];
+  const mergedConfig = _assign(kssBaseConfig, fromConfig, { source });
+  const kssConfig = _mapKeys(mergedConfig, (value, key) => {
+    return key === 'static' ? 'custom' : key;
+  });
+
+  fs.writeFileSync('kss-config.json', JSON.stringify(kssConfig));
+  done();
+});
 
 
 gulp.task('handlebars', () => {
@@ -47,25 +74,13 @@ gulp.task('copy-styles', () => {
 });
 
 gulp.task('copy-assets', () => {
-  const fonts = gulp.src(`${themeFolder}/web/fonts/**/*`)
+  const fonts = gulp.src(`${theme}/web/fonts/**/*`)
     .pipe(gulp.dest(`${destination}/kss-assets/fonts`));
 
-  const images = gulp.src(`${themeFolder}/web/images/**/*`)
+  const images = gulp.src(`${theme}/web/images/**/*`)
     .pipe(gulp.dest(`${destination}/kss-assets/images`));
 
   return merge(fonts, images);
-});
-
-gulp.task('kss-config', done => {
-  const kssProps = ['title', 'source', 'destination', 'staticUrl', 'placeholder'];
-  const fromConfig = _pick(config, kssProps);
-  const mergedConfig = _assign(kssBaseConfig, fromConfig);
-  const kssConfig = _mapKeys(mergedConfig, (value, key) => {
-    return key === 'staticUrl' ? 'custom' : key;
-  });
-
-  fs.writeFileSync('kss-config.json', JSON.stringify(kssConfig));
-  done();
 });
 
 gulp.task('kss', () => {
@@ -74,10 +89,10 @@ gulp.task('kss', () => {
 
 gulp.task('build', gulp.series(
   gulp.parallel(
+    'kss-config',
     'app-sass',
     'copy-styles',
     'handlebars',
-    'kss-config',
     'copy-assets'
   ),
   'kss')

@@ -4,3 +4,4 @@
 *.map
 /src/app/index.hbs
 kss-config.json
+*.lock
