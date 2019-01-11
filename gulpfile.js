@@ -14,7 +14,7 @@ const _mapKeys = require('lodash/mapKeys');
 const docPath = './src/app/docs';
 const kssBaseConfig = {
   title: 'Styleguide',
-  placeholder: '',
+  placeholder: 'logo.svg',
   builder: 'src/app/',
   css: ['kss-assets/css/styleguide.css'],
   js: ['kss-assets/js/kss.js']
