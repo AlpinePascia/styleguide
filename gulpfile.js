@@ -69,8 +69,14 @@ gulp.task('app-sass', () => {
 });
 
 gulp.task('copy-styles', () => {
-  return gulp.src(`${cssFolder}/styleguide.css`)
-    .pipe(gulp.dest('src/app/kss-assets/css/'));
+
+  try {
+    return gulp.src(`${cssFolder}/styleguide.css`)
+      .pipe(gulp.dest('src/app/kss-assets/css/'));
+  } catch (e) {
+    console.log('No styleguide.css found in the source');
+    process.exit(1);
+  }
 });
 
 gulp.task('copy-assets', () => {
