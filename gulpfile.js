@@ -32,8 +32,6 @@ try {
   }
 }
 
-console.log(config);
-
 const theme = config.theme;
 const destination = config.destination;
 const cssFolder = `${theme}/web/css`;
@@ -69,11 +67,10 @@ gulp.task('app-sass', () => {
 });
 
 gulp.task('copy-styles', () => {
-
-  try {
+  if (fs.existsSync(`${cssFolder}/styleguide.css`)) {
     return gulp.src(`${cssFolder}/styleguide.css`)
       .pipe(gulp.dest('src/app/kss-assets/css/'));
-  } catch (e) {
+  } else {
     console.log('No styleguide.css found in the source');
     process.exit(1);
   }
