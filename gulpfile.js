@@ -1,58 +1,90 @@
-const notProduction = process.env.NODE_ENV !== 'production';
-
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const fileinclude = require('gulp-file-include');
 const run = require('gulp-run');
-const exec = require('child_process').exec;
 const fs = require('fs');
+const merge = require('merge-stream');
 
-// if (notProduction) {
-//   var browserSync = require('browser-sync');
-// }
+const _pick = require('lodash/pick');
+const _assign = require('lodash/assign');
+const _mapKeys = require('lodash/mapKeys');
 
-// const theme_folder = './app/design/frontend/Mygento/nespresso';
-// const scss_folder = `${theme_folder}/web/scss`;
-// const css_folder = `${theme_folder}/web/css`;
+const config = require('./config.js');
+const themeFolder = config.themeFolder;
+const destination = config.destination;
+const cssFolder = `${themeFolder}/web/css`;
 
-const guide_folder = 'styleguide';
-const guide_app = `${guide_folder}/src/app`;
-const guide_build = `${guide_folder}/build`;
-const styleguideRepo = 'https://github.com/AlpinePascia/styleguide.git';
+const kssBaseConfig = {
+  title: 'Styleguide',
+  placeholder: '',
+  builder: 'src/app/',
+  css: [
+    'kss-assets/css/styleguide.css'
+  ],
+  js: [
+    'kss-assets/js/kss.js'
+  ]
+};
 
 
-// Styleguide
-gulp.task('guide-handlebars', () => {
-  return gulp.src([`${guide_app}/templates/index.hbs`])
+gulp.task('handlebars', () => {
+  return gulp.src(['src/app/templates/index.hbs'])
     .pipe(fileinclude({
       prefix: '@@',
     }))
-    .pipe(gulp.dest(guide_app));
+    .pipe(gulp.dest('src/app/'));
 });
 
-gulp.task('guide-app-sass', () => {
-  return gulp.src(`${guide_app}/kss-assets/css/kss.scss`)
+gulp.task('app-sass', () => {
+  return gulp.src('src/app/kss-assets/css/kss.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(`${guide_app}/kss-assets/css/`));
+    .pipe(gulp.dest('src/app/kss-assets/css/'));
 });
 
-// gulp.task('guide-copy-styles', () => {
-//   return gulp.src(`${css_folder}/styleguide.css`)
-//     .pipe(gulp.dest(`${guide_app}/kss-assets/css/`));
-// });
+gulp.task('copy-styles', () => {
+  return gulp.src(`${cssFolder}/styleguide.css`)
+    .pipe(gulp.dest('src/app/kss-assets/css/'));
+});
 
+gulp.task('copy-assets', () => {
+  const fonts = gulp.src(`${themeFolder}/web/fonts/**/*`)
+    .pipe(gulp.dest(`${destination}/kss-assets/fonts`));
+
+  const images = gulp.src(`${themeFolder}/web/images/**/*`)
+    .pipe(gulp.dest(`${destination}/kss-assets/images`));
+
+  return merge(fonts, images);
+});
+
+gulp.task('kss-config', done => {
+  const kssProps = ['title', 'source', 'destination', 'staticUrl', 'placeholder'];
+  const fromConfig = _pick(config, kssProps);
+  const mergedConfig = _assign(kssBaseConfig, fromConfig);
+  const kssConfig = _mapKeys(mergedConfig, (value, key) => {
+    return key === 'staticUrl' ? 'custom' : key;
+  });
+
+  fs.writeFileSync('kss-config.json', JSON.stringify(kssConfig));
+  done();
+});
 
 gulp.task('kss', () => {
   return run('npm run kss').exec();
 });
 
-gulp.task('guide-build', gulp.series(gulp.parallel('guide-app-sass', 'guide-copy-styles', 'guide-handlebars'), 'kss'));
+gulp.task('build', gulp.series(
+  gulp.parallel(
+    'app-sass',
+    'copy-styles',
+    'handlebars',
+    'kss-config',
+    'copy-assets'
+  ),
+  'kss')
+);
 
-gulp.task('guide-clone', () => {
-  return exec(`git clone ${styleguideRepo}`);
-});
 
-gulp.task('guide-sync', () => {
+gulp.task('dev', () => {
   // if (notProduction) {
   //   const bSync = browserSync.create();
   //   bSync.init({
@@ -60,7 +92,7 @@ gulp.task('guide-sync', () => {
   //     serveStatic: [guide_build]
   //   });
   //
-  //   gulp.watch(css_folder, gulp.series('guide-build'));
+  //   gulp.watch(cssFolder, gulp.series('guide-build'));
   //   gulp.watch(`${guide_app}/kss-assets/css/*.scss`, gulp.series('guide-app-sass', 'kss'));
   //   gulp.watch(`${guide_app}/templates/**/*.hbs`, gulp.series('guide-handlebars', 'kss'));
   //
@@ -68,15 +100,7 @@ gulp.task('guide-sync', () => {
   // }
 });
 
-const pub_folder = './pub';
-gulp.task('guide-copy-to-serve', () => {
-  return gulp.src(`${guide_build}/**/*`)
-    .pipe(gulp.dest(`${pub_folder}/styleguide`));
-});
 
-gulp.task('guide', cb => {
-  // if (!fs.existsSync(guide_folder)) {
-  //   return gulp.series('guide-clone', 'guide-build', 'guide-sync')(cb);
-  // }
-  return gulp.series('guide-build', 'guide-sync')(cb);
+gulp.task('default', done => {
+  return gulp.series('build')(done);
 });

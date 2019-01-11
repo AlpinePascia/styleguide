@@ -1,25 +1,32 @@
 <!-- scripts. -->
+<script src="/{{this.options.custom}}/requirejs-config.js"></script>
+
 <script type="text/javascript">
     require.config({
-        baseUrl: 'static/version1545923088/frontend/Mygento/nespresso/ru_RU/',
-        paths: {
-            'jquery/ui': 'jquery/jquery-ui',
-            'ko': 'knockoutjs/knockout',
-            'jquery/jquery-storageapi': 'jquery/jquery.storageapi.min',
-            'text': 'mage/requirejs/text',
-            'ui/template': 'Magento_Ui/templates',
-            'kss-assets': '../../../../../../kss-assets'
-        },
+        baseUrl: '/{{this.options.custom}}/'
     });
 
     require([
         'https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js',
-        'kss-assets/vendor/prism',
-        'kss-assets/js/kss',
+        '/styleguide/kss-assets/vendor/prism.js',
+        '/styleguide/kss-assets/js/kss.js',
     ], function(ClipboardJS) {
         new ClipboardJS('.clipboard-btn');
+        window.Prism.highlightAll();
     });
 </script>
+<div>
+    {{#each this.options}}
+        Key: {{@key}} Value = {{this}}
+    {{/each}}
+</div>
+
+<div>
+    {{#each this.styleGuide.data}}
+        Key: {{@key}} Value = {{this}}
+    {{/each}}
+</div>
+
 
 <!-- {{{scripts}}} -->
 <!-- /scripts. -->
