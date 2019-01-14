@@ -41,7 +41,9 @@ gulp.task('kss-config', done => {
 
   // include the docPath - it's a kss thing
   const source = [`${themeFolder}/web/scss`, docPath];
-  const placeholder = config.placeholder;
+
+  // placeholder is an alias for logo - don't ask why :)
+  const placeholder = config.placeholder || kssBaseConfig.placeholder;
   const custom = `static/frontend/${vendor}/${theme}/ru_RU`;
 
   const mergedConfig = _assign(kssBaseConfig, { source, destination, placeholder, custom });

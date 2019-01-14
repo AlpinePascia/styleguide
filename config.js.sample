@@ -5,4 +5,6 @@ module.exports = {
 
   // path to company logo relative to theme images folder
   placeholder: 'nespresso-white.svg',
+
+  // specify 'destination' as command line argument if running form a deploy script
 };
