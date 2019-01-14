@@ -7,9 +7,7 @@ const fs = require('fs');
 const merge = require('merge-stream');
 const util = require('gulp-util');
 
-const _pick = require('lodash/pick');
 const _assign = require('lodash/assign');
-const _mapKeys = require('lodash/mapKeys');
 
 const docPath = './src/app/docs';
 const kssBaseConfig = {
@@ -26,28 +24,29 @@ try {
 } catch (e) {
   config = util.env;
 
-  if (!config.theme || !config.source || !config.destination) {
+  if (!config.theme || !config.vendor) {
     console.log('Provide a minimum configuration as described in the docs');
     process.exit(1);
   }
 }
 
-const theme = config.theme;
-const destination = config.destination;
-const cssFolder = `${theme}/web/css`;
+// const theme = config.theme;
+const { theme, vendor } = config;
+const themeFolder = `../app/design/frontend/${vendor}/${theme}`;
+const cssFolder = `${themeFolder}/web/css`;
+const destination = config.destination || `../../${theme}-workplace/application/pub/styleguide/`;
 
 
 gulp.task('kss-config', done => {
-  const props = ['title', 'source', 'destination', 'static', 'placeholder'];
-  const fromConfig = _pick(config, props);
-  // include the docPath - it's a kss thing
-  const source = [config.source, docPath];
-  const mergedConfig = _assign(kssBaseConfig, fromConfig, { source });
-  const kssConfig = _mapKeys(mergedConfig, (value, key) => {
-    return key === 'static' ? 'custom' : key;
-  });
 
-  fs.writeFileSync('kss-config.json', JSON.stringify(kssConfig));
+  // include the docPath - it's a kss thing
+  const source = [`${themeFolder}/web/scss`, docPath];
+  const placeholder = config.placeholder;
+  const custom = `static/frontend/${vendor}/${theme}/ru_RU`;
+
+  const mergedConfig = _assign(kssBaseConfig, { source, destination, placeholder, custom });
+
+  fs.writeFileSync('kss-config.json', JSON.stringify(mergedConfig, null, 2));
   done();
 });
 
@@ -77,10 +76,10 @@ gulp.task('copy-styles', () => {
 });
 
 gulp.task('copy-assets', () => {
-  const fonts = gulp.src(`${theme}/web/fonts/**/*`)
+  const fonts = gulp.src(`${themeFolder}/web/fonts/**/*`)
     .pipe(gulp.dest(`${destination}/kss-assets/fonts`));
 
-  const images = gulp.src(`${theme}/web/images/**/*`)
+  const images = gulp.src(`${themeFolder}/web/images/**/*`)
     .pipe(gulp.dest(`${destination}/kss-assets/images`));
 
   return merge(fonts, images);
