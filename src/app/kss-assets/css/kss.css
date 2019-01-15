@@ -389,7 +389,8 @@
   margin: 0;
   margin-right: 12px;
   font-size: 1.375rem;
-  font-weight: 400; }
+  font-weight: 400;
+  color: black; }
 
 .kss-modifiers__example {
   position: relative;
@@ -428,6 +429,7 @@
       margin-left: -10px; } }
 
 .kss-color {
+  color: black;
   position: relative;
   display: block;
   box-sizing: border-box;

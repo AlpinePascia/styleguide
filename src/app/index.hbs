@@ -201,7 +201,28 @@
 </section>
 
         <!-- scripts. -->
-<script src="/{{this.options.custom}}/requirejs-config.js"></script>
+<script type="text/javascript">
+    var dest = '{{this.options.destination}}';
+    var isStaging = !/workplace/.test(dest);
+    // isStaging = true;
+    var requireConfig = document.createElement('script');
+    requireConfig.src = isStaging
+        ? '/{{this.options.custom}}/requirejs-config.min.js'
+        : '/{{this.options.custom}}/requirejs-config.js';
+
+
+    document.getElementsByTagName('head')[0].appendChild(requireConfig);
+    if (isStaging) {
+        var minResolver = document.createElement('script');
+        minResolver.src = '/{{this.options.custom}}/requirejs-min-resolver.min.js';
+        document.getElementsByTagName('head')[0].appendChild(minResolver);
+    }
+</script>
+
+<!-- <script src="/{{this.options.custom}}/requirejs-config.js"></script>
+<script src="/{{this.options.custom}}/requirejs-min-resolver.min.js"></script> -->
+
+<!-- </script> -->
 
 <script type="text/javascript">
     require.config({
@@ -217,18 +238,6 @@
         window.Prism.highlightAll();
     });
 </script>
-<div>
-    {{#each this.options}}
-        Key: {{@key}} Value = {{this}}
-    {{/each}}
-</div>
-
-<div>
-    {{#each this.styleGuide.data}}
-        Key: {{@key}} Value = {{this}}
-    {{/each}}
-</div>
-
 
 <!-- {{{scripts}}} -->
 <!-- /scripts. -->
